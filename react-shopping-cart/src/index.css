@@ -9,7 +9,7 @@ body, #root{
 }
 
 
-body, input, select, textarea{
+body, input, select, textarea, button{
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -18,7 +18,9 @@ body, input, select, textarea{
 a:hover{
   color: #ff8000;
 }
-
+a{
+  text-decoration: none;
+}
 
 .grid-container{
   display: grid;
@@ -54,4 +56,17 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.content{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main{
+  flex: 3 60rem;
+}
+
+.sidebar{
+  flex: 1 20rem;
 }
