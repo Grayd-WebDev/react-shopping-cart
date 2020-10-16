@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./products-list.css";
 import ProductListItem from "../product-list-item";
 
-export default class ProductList extends Component {
+class ProductList extends Component {
   render() {
     const { products } = this.props;
 
@@ -17,3 +17,5 @@ export default class ProductList extends Component {
     );
   }
 }
+
+export default ProductList;

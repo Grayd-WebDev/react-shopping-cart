@@ -3,13 +3,24 @@ import React, { Component } from "react";
 import Filter from "./components/filter";
 import ProductList from "./components/product-list";
 import data from "./data.json";
+import { withProductService } from "./components/hoc";
+import ProductService from "./services/productService";
 
 class App extends Component {
   state = {
-    products: data.products,
+    products: [],
     size: "",
     sort: "",
   };
+
+  componentDidMount() {
+    const { productService } = this.props;
+    
+    productService.getProducts().then((products) => {
+      this.setState({ products });
+    });
+  }
+
   onFilter = (event) => {
     const size = event.target.value;
     this.setState(() => {
@@ -47,7 +58,7 @@ class App extends Component {
         case "lowest":
           return a.price - b.price;
         case "latest":
-          return parseInt(a._id.match(/\d+/))  - parseInt(b._id.match(/\d+/));
+          return parseInt(a._id.match(/\d+/)) - parseInt(b._id.match(/\d+/));
       }
     });
 
@@ -56,10 +67,10 @@ class App extends Component {
   // order by price and id
 
   render() {
-    const { orderProducts, filterProducts} = this;
+    const { orderProducts, filterProducts } = this;
     const { products, sort, size } = this.state;
     const visibleProducts = orderProducts(sort, filterProducts(size, products));
-  
+
     return (
       <div className="grid-container">
         <header className="App-header">
@@ -86,4 +97,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withProductService()(App);
